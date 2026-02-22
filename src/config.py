@@ -25,8 +25,8 @@ class Config:
     grad_clip_max_norm: float = 1.0
 
     # Augmentation
-    mixup_alpha: float = 1.0
-    cutmix_alpha: float = 1.0
+    mixup_alpha: float = 0.2
+    cutmix_alpha: float = 0.5
     mixup_cutmix_prob_max: float = 1.0
     mixup_switch_prob: float = 0.5
 

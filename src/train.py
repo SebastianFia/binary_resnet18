@@ -16,7 +16,7 @@ from dataset import get_dataloaders
 def create_base_model(config):
     model = timm.create_model('resnet18', pretrained=True, num_classes=config.d_out)
 
-    # We train on CIFAR1000: Replace Stem (tuned for imagenet).
+    # We train on CIFAR100: Replace Stem (tuned for imagenet).
     model.conv1 = nn.Conv2d(3, 64, kernel_size=3, stride=1, padding=1, bias=False)
     nn.init.kaiming_normal_(model.conv1.weight, mode='fan_out', nonlinearity='relu')
     model.maxpool = nn.Identity()
@@ -24,7 +24,7 @@ def create_base_model(config):
     convert_to_bit_model(model, config)
     return BitModelWrapper(model, use_bin_loss=config.use_bin_loss)
 
-def _train_loop(model, config, trainloader, testloader, epochs, device, is_binarizing, run_name):
+def _train_loop(model, config: Config, trainloader, testloader, epochs, device, is_binarizing, run_name):
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.AdamW(model.parameters(), lr=config.lr, weight_decay=config.weight_decay)
     scaler = GradScaler("cuda", enabled=config.use_amp)
@@ -49,7 +49,7 @@ def _train_loop(model, config, trainloader, testloader, epochs, device, is_binar
             current_p, current_bin_ratio, current_bin_loss_lambda = 0.0, 0.0, 0.0
             
             # Use schedules ONLY if we are in the binarizing phase
-            if is_binarizing and config.do_binarization:
+            if is_binarizing and config:
                 current_p = get_scheduled_param(global_step, total_steps, config.schedule_phases_p)
                 if config.use_bin_loss:
                     current_bin_loss_lambda = get_scheduled_param(global_step, total_steps, config.schedule_phases_bin_loss_lambda)

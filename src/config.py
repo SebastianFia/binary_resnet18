@@ -1,12 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List, Any
 
+LR = 1e-3
+LR_MIN = 1e-5
+
 @dataclass
 class Config:
-    do_binarization: bool = True
     batch_size: int = 128
-    lr: float = 1e-2
-    lr_min: float = 1e-5
     weight_decay: float = 1e-4
     
     epochs_finetune: int = 50
@@ -16,12 +16,8 @@ class Config:
     p_min: float = 0.0
     p_max: float = 1.0
     bin_ratio_max: float = 1.0
-    ste_in_bin: bool = True
     use_bin_loss: bool = False
     bin_loss_lambda_max: float = 0.01
-
-    fastbin_end_ratio: float = 0.5
-    quant_bits: int = 8
 
     # Training Toggles
     use_amp: bool = True
@@ -34,21 +30,20 @@ class Config:
     mixup_cutmix_prob_max: float = 1.0
     mixup_switch_prob: float = 0.5
 
-    # Schedules
     schedule_phases_lr: list = field(default_factory=lambda: [
-        [0.05, "linear", 1e-5, 1e-2], 
-        [1.0, "cosine", 1e-2, 1e-5]
+        [0.05, "linear", LR_MIN, LR], 
+        [1.0, "cosine", LR, LR_MIN]
     ])
     schedule_phases_bin_ratio: list = field(default_factory=lambda: [
-        [0.30, "cosine", 0.0, 0.5],
+        [0.3, "cosine", 0.0, 0.5],
         [1.0, "cosine", 0.5, 1.0]
     ])
     schedule_phases_bin_loss_lambda: list = field(default_factory=lambda: [
-        [0.5, "stay", 0.0, 0.0],
-        [1.0, "linear", 0.0, 0.01]
+        [0.0, "stay", 0.0, 0.0],
+        [1.0, "linear", 0.0, 0.0]
     ])
     schedule_phases_p: list = field(default_factory=lambda: [
-        [0.30, "cosine", 0.0, 0.5],
+        [0.0, "cosine", 0.0, 0.5],
         [1.0, "cosine", 0.5, 1.0]
     ])
     schedule_phases_mixup_cutmix_prob: list = field(default_factory=lambda: [

@@ -8,9 +8,10 @@ on Imagenet, loaded from timm.
 We only binarize the weights of the Linear and Conv2d layers, containing almost all the weights
 of the model. We also gradually quantize to 8 bits the inputs to those layers.
 
-The gradual quantization/binarization is done by scheduling an alpha param from 0 to 1, 
-and interpolating the full precision and binarized weights. We also schedule a p param from 0 to 1:
-each entry of a weight has probability p of being binarized (we are "sprinkling" the weight tensors with binarized values).
+The gradual quantization/binarization is done by scheduling a bin_ratio param from 0 to 1, 
+and using it to interpolate  the full precision and binarized weights. 
+We also schedule a p param from 0 to 1: each entry of a weight has probability p of being binarized 
+(we are "sprinkling" the weight tensors with binarized values).
 This means that at the start of training the weights are in full precision, and at the end they are fully binary.
 
 The weight binarization is simulated (the weights are still in full precision, but constrained to two values, -1 and +1);

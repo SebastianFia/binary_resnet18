@@ -21,7 +21,7 @@ def create_base_model(config):
     nn.init.kaiming_normal_(model.conv1.weight, mode='fan_out', nonlinearity='relu')
     model.maxpool = nn.Identity()
     
-    convert_to_bit_model(model, config)
+    convert_to_bit_model(model)
     return BitModelWrapper(model, use_bin_loss=config.use_bin_loss)
 
 def _train_loop(model, config: Config, trainloader, testloader, epochs, device, is_binarizing, run_name):

@@ -26,7 +26,7 @@ def create_base_model(config):
 
 def _train_loop(model, config: Config, trainloader, testloader, epochs, device, is_binarizing, run_name):
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.AdamW(model.parameters(), lr=config.lr, weight_decay=config.weight_decay)
+    optimizer = optim.AdamW(model.parameters(), weight_decay=config.weight_decay)
     scaler = GradScaler("cuda", enabled=config.use_amp)
     
     total_steps = len(trainloader) * epochs

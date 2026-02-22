@@ -47,5 +47,5 @@ class Config:
         [1.0, "cosine", 0.5, 1.0]
     ])
     schedule_phases_mixup_cutmix_prob: list = field(default_factory=lambda: [
-        [1.0, "stay", 1.0, 1.0]
+        [1.0, "stay", 0.5, 0.5]
     ])

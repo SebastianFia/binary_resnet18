@@ -1,7 +1,7 @@
 # binary_resnet18
 
 In this repository we provide the code to gradually binarize the weights of a Resnet18 pretrained
-on Imagenet, loaded from timm.
+on Imagenet, loaded from timm. For our experiments, we finetune on CIFAR100.
 
 ## Methodology 
 

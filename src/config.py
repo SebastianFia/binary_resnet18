@@ -35,17 +35,18 @@ class Config:
         [1.0, "cosine", LR, LR_MIN]
     ])
     schedule_phases_bin_ratio: list = field(default_factory=lambda: [
-        [0.3, "cosine", 0.0, 0.5],
-        [1.0, "cosine", 0.5, 1.0]
+        [1.0, "circle", 0.0, 1.0]
+        # [0.3, "cosine", 0.0, 0.5],
+        # [1.0, "cosine", 0.5, 1.0]
     ])
     schedule_phases_bin_loss_lambda: list = field(default_factory=lambda: [
-        [0.0, "stay", 0.0, 0.0],
-        [1.0, "linear", 0.0, 0.0]
+        [1.0, "circle", 0.0, 1.0]
     ])
-    schedule_phases_p: list = field(default_factory=lambda: [
-        [0.0, "cosine", 0.0, 0.5],
-        [1.0, "cosine", 0.5, 1.0]
+    schedule_phases_bin_ratio: list = field(default_factory=lambda: [
+        [1.0, "circle", 0.0, 1.0]
+        # [0.3, "cosine", 0.0, 0.5],
+        # [1.0, "cosine", 0.5, 1.0]
     ])
     schedule_phases_mixup_cutmix_prob: list = field(default_factory=lambda: [
-        [1.0, "stay", 0.5, 0.5]
+        [1.0, "stay", 0.3, 0.3]
     ])

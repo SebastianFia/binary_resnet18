@@ -9,6 +9,7 @@ def interp(progress, typ="cosine", start=0.0, end=1.0):
     t = 0
     if typ == "cosine": t = (1 - math.cos(progress * math.pi)) / 2
     elif typ == "linear": t = progress
+    elif typ == "circle": t = 1 - (1 - math.sqrt(progress))**2
     elif typ == "stay": t = 0
     return start + (end - start) * t
 

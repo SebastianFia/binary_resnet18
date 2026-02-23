@@ -15,7 +15,7 @@ We also schedule a p param from 0 to 1: each entry of a weight has probability p
 This means that at the start of training the weights are in full precision, and at the end they are fully binary.
 
 The weight binarization is simulated (the weights are still in full precision, but constrained to two values, -1 and +1);
-same thing for the activation binarization (which are constrained to the int8 range of values).
+same thing for the activation quantization (which are constrained to the int8 range of values).
 
 ## Reproducibility 
 Running the training script requires python3 and having a wandb account for logging.

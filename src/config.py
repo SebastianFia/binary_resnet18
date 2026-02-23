@@ -25,8 +25,8 @@ class Config:
     grad_clip_max_norm: float = 1.0
 
     # Augmentation
-    mixup_alpha: float = 0.2
-    cutmix_alpha: float = 0.5
+    mixup_alpha: float = 0.8
+    cutmix_alpha: float = 1.0
     mixup_cutmix_prob_max: float = 1.0
     mixup_switch_prob: float = 0.5
 
@@ -48,5 +48,5 @@ class Config:
         # [1.0, "cosine", 0.5, 1.0]
     ])
     schedule_phases_mixup_cutmix_prob: list = field(default_factory=lambda: [
-        [1.0, "stay", 0.3, 0.3]
+        [1.0, "stay", 1.0, 1.0]
     ])

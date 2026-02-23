@@ -131,7 +131,7 @@ def _train_loop(model, config: Config, trainloader, testloader, epochs, device, 
     wandb.finish()
     return model
 
-def finetune(config):
+def finetune(config: Config):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     trainloader, testloader = get_dataloaders(config)
     
@@ -146,7 +146,7 @@ def finetune(config):
     torch.save(model.state_dict(), "checkpoints/finetuned.pth")
     print("Saved finetuned model to checkpoints/finetuned.pth")
 
-def binarize(config):
+def binarize(config: Config):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     trainloader, testloader = get_dataloaders(config)
     

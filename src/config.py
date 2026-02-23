@@ -42,7 +42,7 @@ class Config:
     schedule_phases_bin_loss_lambda: list = field(default_factory=lambda: [
         [1.0, "circle", 0.0, 1.0]
     ])
-    schedule_phases_bin_ratio: list = field(default_factory=lambda: [
+    schedule_phases_p: list = field(default_factory=lambda: [
         [1.0, "circle", 0.0, 1.0]
         # [0.3, "cosine", 0.0, 0.5],
         # [1.0, "cosine", 0.5, 1.0]

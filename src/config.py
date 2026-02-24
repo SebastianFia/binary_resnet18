@@ -3,7 +3,7 @@ from typing import List, Any
 
 LR = 1e-3
 LR_MIN = 1e-5
-NOBIN_FRAC = 0.15 # Fraction of training to stay fully float
+NOBIN_FRAC = 0.20 # Fraction of training to stay fully float
 FASTBIN_FRAC = 0.30 # We binarize more aggressively until this point
 FASTBIN_END_RATIO = 0.5
 
@@ -13,7 +13,7 @@ class Config:
     weight_decay: float = 1e-4
     
     # epochs_finetune: int = 50
-    epochs_binarize: int = 200
+    epochs_binarize: int = 300
     
     d_out: int = 100
     p_min: float = 0.0
@@ -28,8 +28,8 @@ class Config:
     grad_clip_max_norm: float = 1.0
 
     # Augmentation
-    mixup_alpha: float = 0.8
-    cutmix_alpha: float = 1.0
+    mixup_alpha: float = 0.2
+    cutmix_alpha: float = 0.5
     mixup_cutmix_prob_max: float = 1.0
     mixup_switch_prob: float = 0.5
 
@@ -51,5 +51,5 @@ class Config:
         [1.0, "circle", 0.0, 1.0]
     ])
     schedule_phases_mixup_cutmix_prob: list = field(default_factory=lambda: [
-        [1.0, "stay", 1.0, 1.0]
+        [1.0, "stay", 0.5, 0.5]
     ])

@@ -3,6 +3,14 @@
 In this repository we provide the code to gradually binarize the weights of a Resnet18 pretrained
 on Imagenet. For our experiments, we finetune on CIFAR100.
 
+## Results
+By running the `train.py` script with the current settings of `config.py`:
+- we reach a baseline (no binarization/quantization) of **76.7%** eval accuracy on cifar100 over 60 epochs
+- then we binarize gradually, retaining a **74.3%** eval accuracy 240 additional epochs.
+
+![Alt text](results/train40binarize240.png)
+
+
 ## Methodology 
 
 We only binarize the weights of the Linear and Conv2d layers, containing almost all the weights
@@ -21,13 +29,6 @@ same thing for the activation quantization (which are constrained to the int8 ra
 
 The stem of the Resnet18 (7x7 conv with stride 2, followed by 2x2 pooling) is replaced with a simple
 3x3 conv with stride 1. This is done to remove the 4x initial downsampling needed for Imagenet, but not for CIFAR100.
-
-## Results
-By running the `train.py` script with the current settings of `config.py`:
-- we reach a baseline (no binarization/quantization) of 76.7% eval accuracy on cifar100 over 60 epochs
-- then we binarize gradually, retaining a 74.3% eval accuracy 240 additional epochs.
-
-![Alt text](results/train40binarize240.png)
 
 ## Reproducibility 
 Running the training script requires python3 and having a wandb account for logging.

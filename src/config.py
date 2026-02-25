@@ -12,7 +12,6 @@ class Config:
     batch_size: int = 128
     weight_decay: float = 1e-4
     
-    # epochs_finetune: int = 50
     epochs_binarize: int = 300
     
     d_out: int = 100
@@ -48,7 +47,7 @@ class Config:
         [1.0, "cosine", FASTBIN_END_RATIO, 1.0], 
     ])
     schedule_phases_bin_loss_lambda: list = field(default_factory=lambda: [
-        [1.0, "circle", 0.0, 1.0]
+        [1.0, "linear", 0.0, 1.0]
     ])
     schedule_phases_mixup_cutmix_prob: list = field(default_factory=lambda: [
         [1.0, "stay", 0.5, 0.5]

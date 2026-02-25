@@ -131,38 +131,6 @@ def _train_loop(model, config: Config, trainloader, testloader, epochs, device, 
     wandb.finish()
     return model
 
-# def finetune(config: Config):
-#     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-#     trainloader, testloader = get_dataloaders(config)
-    
-#     print("\n--- Starting Phase 1: Finetune (No Binarization) ---")
-#     model = create_base_model(config).to(device)
-    
-#     model = _train_loop(model, config, trainloader, testloader, 
-#                         epochs=config.epochs_finetune, device=device, 
-#                         is_binarizing=False, run_name="Finetune_Phase")
-    
-#     os.makedirs("checkpoints", exist_ok=True)
-#     torch.save(model.state_dict(), "checkpoints/finetuned.pth")
-#     print("Saved finetuned model to checkpoints/finetuned.pth")
-
-# def binarize(config: Config):
-#     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-#     trainloader, testloader = get_dataloaders(config)
-    
-#     ckpt_path = "checkpoints/finetuned.pth"
-#     if not os.path.exists(ckpt_path):
-#         print("Finetuned checkpoint not found. Falling back to finetuning first...")
-#         finetune(config)
-        
-#     print("\n--- Starting Phase 2: Binarization Pipeline ---")
-#     model = create_base_model(config).to(device)
-#     model.load_state_dict(torch.load(ckpt_path, weights_only=True))
-    
-#     _train_loop(model, config, trainloader, testloader, 
-#                 epochs=config.epochs_binarize, device=device, 
-#                 is_binarizing=True, run_name="Binarize_Phase")
-
 def binarize(config: Config):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     trainloader, testloader = get_dataloaders(config)
